@@ -1,0 +1,287 @@
+# =============================================================================
+# Vireo Audio — Customer Support Operating Policy v3.2
+# Machine-readable transcription of data/raw/support-policy.pdf
+#
+# RULE: every value below carries the verbatim `source_quote` it was taken from.
+# Nothing in this file is inferred, rounded or invented. If a number the code
+# needs is absent from the PDF it is absent here too, and is declared under
+# `not_defined_by_policy` so that the gap is visible rather than guessed.
+# =============================================================================
+
+version: "3.2"
+effective_date: "2025-04-01"
+owner: "Head of Customer Experience"
+classification: "Internal"
+source_document: "support-policy.pdf"
+source_pages: 2
+
+# -----------------------------------------------------------------------------
+# Section 3 — First-response service levels and breach credits
+# -----------------------------------------------------------------------------
+sla:
+  source_section: "3"
+  source_quote: >-
+    Targets: chat 15 minutes, voice callback 2 hours, social 4 hours, email 8 hours.
+    Every ticket that misses its first-response target automatically issues a store
+    credit of Rs 350 to the customer's account on resolution.
+  first_response_target_minutes:
+    chat: 15
+    voice: 120
+    social: 240
+    email: 480
+  breach_credit_inr: 350
+  breach_credit_is_automatic: true
+  breach_credit_reason_independent: true
+  breach_attributed_to: "resolving agent"
+  breach_attribution_quote: >-
+    Breaches are reported against the resolving agent in the helpdesk's standard reports.
+
+# -----------------------------------------------------------------------------
+# Section 4 — Cost standards (FY26 planning figures)
+# -----------------------------------------------------------------------------
+cost_standards:
+  source_section: "4"
+  source_quote: >-
+    Fully loaded cost per contact, used for all business cases: chat Rs 210,
+    email Rs 260, voice callback Rs 520, social Rs 240. Blended across the current
+    channel mix: Rs 290 per contact. Internal transfer between teams: Rs 305 per
+    transfer (re-handling and administration). Fully loaded agent cost for staffing
+    decisions: Rs 165 per agent-hour. A single agent shift is 8 hours.
+  cost_per_contact_inr:
+    chat: 210
+    email: 260
+    voice: 520
+    social: 240
+  blended_cost_per_contact_inr: 290
+  transfer_cost_inr: 305
+  agent_cost_per_hour_inr: 165
+  shift_hours: 8
+
+# -----------------------------------------------------------------------------
+# Section 5 — Refunds, replacements and reason codes  (the authorisation rules)
+# -----------------------------------------------------------------------------
+refunds:
+  source_section: "5"
+
+  entitlements:
+    - id: DOA
+      source_quote: >-
+        Dead on arrival (within 7 days of delivery): customer chooses a full refund
+        or a replacement.
+      window_days: 7
+      window_starts_from: "delivery"
+      remedies: ["full_refund", "replacement"]
+      customer_choice: true
+      mutually_exclusive: true
+    - id: IN_WARRANTY_FAULT
+      source_quote: "In-warranty fault: repair or replacement."
+      remedies: ["repair", "replacement"]
+      refund_is_an_entitlement: false
+      note: >-
+        Section 5 does not list refund as a remedy for an in-warranty fault. The
+        WTY-BUYBACK reason code exists in the dropdown, so buy-backs happen, but the
+        policy text does not define an entitlement or an authorisation limit for them.
+    - id: LOST_OR_DAMAGED_IN_TRANSIT
+      source_quote: "Lost or damaged in transit: reshipment or refund."
+      remedies: ["reshipment", "refund"]
+      mutually_exclusive: true
+
+  # The single hardest prohibition in the document.
+  dual_remedy_prohibition:
+    source_quote: >-
+      In no case is a customer to receive both a refund and a replacement for the
+      same order; where this happens in error it must be escalated to the Team Lead
+      and Finance the same day.
+    prohibited: true
+    scope: "same order"
+    on_breach: "escalate to Team Lead and Finance the same day"
+    severity: "hard_prohibition"
+
+  goodwill:
+    source_quote: >-
+      Goodwill credits are capped at Rs 500 per ticket and require Team Lead approval.
+    cap_inr: 500
+    cap_basis: "per ticket"
+    requires_approval_by: "Team Lead"
+    severity: "hard_limit"
+
+  replacement_cost_model:
+    source_quote: >-
+      Replacement cost for planning: the product's unit cost (see products.csv) plus
+      Rs 340 for reverse pickup and forward shipping. Refurbishment recovery is not
+      to be assumed in business cases.
+    basis: "product unit_cost_inr"
+    logistics_add_inr: 340
+    assume_refurbishment_recovery: false
+
+  reason_codes:
+    source_quote: >-
+      Refund reason codes: GW-OTHER Goodwill / Other, DOA-REPL Dead on arrival,
+      refund chosen, LOST-TRANSIT Lost or undelivered, DUP-PAYMENT Duplicate or
+      failed payment, CANCEL Cancellation before dispatch, PRICE-ADJ Price or coupon
+      adjustment, RETURN-QC-OK Return received and passed QC, WTY-BUYBACK Warranty
+      buy-back. The code is selected by the agent from a dropdown at the time the
+      refund is raised.
+    selected_by: "agent"
+    selection_mechanism: "dropdown"
+    codes:
+      GW-OTHER:      "Goodwill / Other"
+      DOA-REPL:      "Dead on arrival, refund chosen"
+      LOST-TRANSIT:  "Lost or undelivered"
+      DUP-PAYMENT:   "Duplicate or failed payment"
+      CANCEL:        "Cancellation before dispatch"
+      PRICE-ADJ:     "Price or coupon adjustment"
+      RETURN-QC-OK:  "Return received and passed QC"
+      WTY-BUYBACK:   "Warranty buy-back"
+
+# -----------------------------------------------------------------------------
+# Section 6 — Teams, tiers and ownership
+# -----------------------------------------------------------------------------
+teams:
+  source_section: "6"
+  # Kept as three separate verbatim quotes because the PDF separates them with a
+  # sentence about Escalations & Warranty ownership; joining them would have been a
+  # paraphrase, which loader.verify_against_pdf() correctly rejects.
+  refund_ownership_quote: >-
+    Returns Desk owns return pickups and refund processing; it processes the large
+    majority of refunds by design.
+  tier2_certification_quote: >-
+    Tier 2 work is certified: only Tier 2 agents may approve warranty replacements.
+  tier2_comparison_quote: >-
+    Tier 2 agents are not to be compared with Tier 1 on volume metrics.
+  tier1_teams: ["Chat Frontline", "Email Frontline", "Voice Frontline", "Logistics", "Billing", "Returns Desk"]
+  tier2_teams: ["Escalations & Warranty"]
+  refund_processing_owner: "Returns Desk"
+  refund_volume_is_by_design: true
+  warranty_replacement_approval_requires_tier: 2
+  tier2_comparable_on_volume: false
+  reporting_constraint: >-
+    Refund counts must not be compared across teams or tiers without normalising
+    for the fact that the Returns Desk is designed to process refunds and that
+    Tier 2 is explicitly excluded from volume comparison.
+
+# -----------------------------------------------------------------------------
+# Section 7 — Shifts and roster
+# -----------------------------------------------------------------------------
+roster:
+  source_section: "7"
+  source_quote: >-
+    Shifts are defined in Indian Standard Time: Morning 06:00-14:00, Day 14:00-22:00,
+    Night 22:00-06:00. The roster is maintained as one row per assignment with
+    from/to dates; an agent who changes site or shift receives a new roster row and
+    keeps the same agent_id.
+  timezone: "Asia/Kolkata"
+  shifts:
+    Morning: {start: "06:00", end: "14:00"}
+    Day:     {start: "14:00", end: "22:00"}
+    Night:   {start: "22:00", end: "06:00"}
+  one_row_per_assignment: true
+  agent_id_stable_across_assignments: true
+
+# -----------------------------------------------------------------------------
+# Section 8 — CSAT
+# -----------------------------------------------------------------------------
+csat:
+  source_section: "8"
+  source_quote: >-
+    A one-question survey (1-5) is sent when a ticket is resolved. Around 45% of
+    customers respond. A blank score means no response and must be excluded from
+    averages, not treated as zero. Tickets auto-closed after 72 hours without a
+    customer reply are recorded as closed, count as a completed attendance, and are
+    surveyed.
+  scale: [1, 5]
+  expected_response_rate: 0.45
+  blank_means: "no response"
+  blank_handling: "exclude_from_average"
+  blank_as_zero_is_wrong: true
+  auto_close_hours: 72
+  auto_closed_counts_as_attendance: true
+
+# -----------------------------------------------------------------------------
+# Section 9 — Systems and timestamps  (the data-quality landmines)
+# -----------------------------------------------------------------------------
+systems:
+  source_section: "9"
+  source_quote: >-
+    The current helpdesk went live on 14 September 2025. Tickets before that date
+    were migrated from the previous tool (Freshdesk); a subset of legacy tickets was
+    re-imported during reconciliation and may appear in exports under both source
+    systems. The helpdesk displays and exports timestamps in IST in its standard
+    reports. The helpdesk API exports UTC. Resolution timestamps for migrated tickets
+    were reconstructed from the legacy event log, which stores UTC. The legacy tool
+    stored monetary values in its own native unit; the current helpdesk stores rupees.
+  helpdesk_go_live: "2025-09-14"
+  legacy_system: "Freshdesk"
+  legacy_source_system_value: "legacy_fd"
+  current_source_system_value: "helpdesk"
+  duplicate_reimport_possible: true
+  duplicate_reimport_scope: "a subset of legacy tickets ... may appear in exports under both source systems"
+  monetary_units:
+    helpdesk: "INR"
+    legacy_fd: "native unit of the legacy tool — NOT rupees"
+    resolution: >-
+      The policy states the unit differs but does not name it. The unit is
+      determined empirically in app/services/ingest.py from the 125 tickets that
+      appear under both source systems, and the ratio is asserted before any
+      conversion is applied.
+  timestamps:
+    standard_report_export: "IST"
+    api_export: "UTC"
+    migrated_resolved_at_source: "legacy event log (UTC)"
+  transfers_field_exists_in: ["helpdesk"]
+  transfers_quote: >-
+    The transfers field counts hand-offs between teams and exists only in the
+    current helpdesk.
+  resolving_agent_field: "agent_id"
+  first_assigned_team_field: "assigned_team"
+
+# -----------------------------------------------------------------------------
+# Section 10 — Reporting definitions
+# -----------------------------------------------------------------------------
+reporting_definitions:
+  source_section: "10"
+  source_quote: >-
+    First-contact resolution: a ticket is resolved at first contact if the same
+    customer does not contact again about the same issue within 30 days of
+    resolution. A return contact within that window is a repeat contact and is
+    costed at the contact cost of the channel used. Handle time: first response to
+    resolution. Breach: first response later than the target in section 3.
+    Attendance: any ticket in status resolved or closed.
+  fcr_window_days: 30
+  fcr_same_issue_proxy: "same customer_id and same product_sku"
+  fcr_proxy_is_an_assumption: true
+  handle_time: "first_response_at -> resolved_at"
+  attendance_statuses: ["resolved", "closed"]
+  repeat_contact_costed_at: "contact cost of the channel used"
+
+# -----------------------------------------------------------------------------
+# Gaps: things the code would like and the policy does not provide.
+# These are NOT filled in with guesses. Anything depending on them either
+# degrades to REQUIRES_HUMAN_REVIEW or is reported as unverifiable.
+# -----------------------------------------------------------------------------
+not_defined_by_policy:
+  - id: per_agent_refund_authorisation_limit
+    detail: >-
+      No maximum refund an individual agent may authorise. Only the Rs 500 goodwill
+      cap and the Tier 2 warranty-replacement certification are stated. The platform
+      therefore treats REFUND_AUTO_APPROVE_MAX_INR as a configurable operational
+      control and labels it as such, never as policy.
+  - id: delivery_date
+    detail: >-
+      The 7-day DOA window runs from delivery. No delivered_at exists in orders.csv,
+      so DOA window compliance is NOT verifiable from this data pack. DOA refunds are
+      never classified as avoidable on window grounds.
+  - id: refund_approval_audit_field
+    detail: >-
+      No field records who approved a refund or whether Team Lead approval was
+      obtained. Goodwill-over-cap breaches are therefore reported as
+      "no approval evidence recorded", not as "unapproved".
+  - id: referenced_sops
+    detail: >-
+      Agent notes cite SOP 2.7, 3.1, 4.2 and 5.4. Those SOPs are not part of this
+      policy document and were not supplied, so their content cannot be validated.
+  - id: return_qc_outcome_field
+    detail: >-
+      RETURN-QC-OK means the return was received and passed QC, but no structured
+      field records pickup or QC completion. Refund-without-return is detected from
+      agent note text only.

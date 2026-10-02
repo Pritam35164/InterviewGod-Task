@@ -1,0 +1,4 @@
+order_id,customer_id,sku,order_date,channel,qty,order_value_inr,lot_code
+VR800001,C100001,VA-EB-AIR,2024-12-01,vireo.in,1,1799,AIR-2411-1
+VR800002,C100002,VA-HP-ST2,2024-12-15,Amazon,1,4999,ST2-2411-2
+VR800003,C100001,VA-EB-AIR,2025-01-05,Flipkart,1,1799,AIR-2501-1

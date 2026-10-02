@@ -1,0 +1,41 @@
+# Secrets must never enter a build context.
+.env
+.env.*
+!.env.example
+
+# Source data pack: mounted as a volume at runtime, not baked into images.
+data/
+outputs/
+
+.git/
+.gitignore
+.github/
+
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# Tests and docs are not needed in the runtime images.
+tests/
+docs/
+*.md
+!README.md
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+hf_cache/
+.cache/
+_scratch/
+*.log
+*.db
+*.sqlite*

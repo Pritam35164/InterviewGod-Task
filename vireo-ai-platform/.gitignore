@@ -1,0 +1,50 @@
+# ---- secrets: never commit ----
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ---- source data pack ----
+# Keep the assignment CSVs/PDF/txt so a clone can ingest without extra steps.
+# Ignore anything else dropped into data/raw.
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/*.csv
+!data/raw/*.pdf
+!data/raw/*.txt
+!data/evaluation_set.json
+
+# ---- generated outputs ----
+outputs/*
+!outputs/.gitkeep
+
+# ---- python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# ---- models / caches ----
+.cache/
+hf_cache/
+*.onnx
+*.safetensors
+
+# ---- editors / os ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# ---- scratch ----
+_scratch/
+*.log

@@ -1,0 +1,3 @@
+customer_id,name,city,state,signup_date,care_plus
+C100001,Test One,Bengaluru,KA,2024-01-01,N
+C100002,Test Two,Indore,MP,2024-02-01,Y

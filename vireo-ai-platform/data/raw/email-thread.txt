@@ -1,0 +1,67 @@
+EMAIL THREAD â€” Vireo Audio â€” support tickets (Set C)
+Messages exchanged before this pack was sent. Provided as-is.
+========================================================================
+
+From: Arjun Mehta, Finance Controller, Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Neha Kulkarni; Sameer Qureshi
+Date: Mon 7 Sep 2026, 11:05
+Subject: Refund summary
+
+Kabir - monthly refunds by reason code and by agent. Who, how much, what for. My export
+sums to well over a crore a quarter which cannot be right and is exactly why I want
+someone else's eyes on it.
+
+------------------------------------------------------------------------
+
+From: Sameer Qureshi, Helpdesk Administrator (IT), Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Arjun Mehta; Neha Kulkarni
+Date: Mon 7 Sep 2026, 16:10
+Subject: Re: Refund summary
+
+Files attached. Two things. The legacy Freshdesk rows store money the way Freshdesk
+stored money, and I believe Finance reconciles that on their side - I never changed it.
+Reason codes come from a dropdown; the first option in the list is GW-OTHER (Goodwill /
+Other) and agents are agents. The helpdesk's own report says refunds run around Rs 11
+lakh a quarter, for what it's worth. Some tickets appear twice from the migration re-
+import.
+
+------------------------------------------------------------------------
+
+From: Priya Raman, Head of Customer Experience, Vireo Audio
+To: Arjun Mehta, Finance Controller, Vireo Audio
+Cc: Neha Kulkarni; Sameer Qureshi; Kabir Nanda
+Date: Tue 8 Sep 2026, 09:20
+Subject: Re: Refund summary
+
+Before you go after my agents: refunds went up because we told the frontline to stop
+arguing with customers in Q4. CSAT went up 0.4 in the same period. That was the deal we
+all signed off on.
+
+------------------------------------------------------------------------
+
+From: Neha Kulkarni, Support Operations Manager, Vireo Audio
+To: Arjun Mehta, Finance Controller, Vireo Audio
+Cc: Priya Raman; Sameer Qureshi; Kabir Nanda
+Date: Tue 8 Sep 2026, 15:55
+Subject: Re: Refund summary
+
+Slight tangent. I did a spot check of twenty refund tickets last month and in a couple
+the customer also got a new unit sent out. Probably one-offs - the Returns Desk is very
+careful about this and it's them doing most of the refunds anyway. Mentioning it in case
+it's useful.
+
+------------------------------------------------------------------------
+
+From: Arjun Mehta, Finance Controller, Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Neha Kulkarni; Sameer Qureshi
+Date: Wed 9 Sep 2026, 08:15
+Subject: Re: Refund summary
+
+Fine. Rs 11 lakh a quarter versus my crore - one of us is reading the export wrong.
+Summary by reason code and agent, monthly, and I want the total to reconcile. Board pack
+is on the 24th.
+
+------------------------------------------------------------------------
